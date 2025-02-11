@@ -631,7 +631,10 @@ class GPSymbolicRegressor():
 
             print("Best individuals of this generation:", flush=True)
             for i in range(self.num_best_inds_str):
-                print(str(best_inds[i]))
+                print(str(best_inds[i]), flush=True)
+            print("Constants of the best individuals:", flush=True)
+            for i in range(self.num_best_inds_str):
+                print(best_inds[i].consts, flush=True)
 
             # Update history of best fitness and best validation error
             self.train_fit_history = self.logbook.chapters["fitness"].select("min")
@@ -650,9 +653,9 @@ class GPSymbolicRegressor():
                 self.toolbox.plot_best_func(best_inds[0])
 
             self.best = best_inds[0]
-            if self.best.fitness.values[0] <= 1e-15:
-                print("EARLY STOPPING.")
-                break
+            # if self.best.fitness.values[0] <= 1e-15:
+            #    print("EARLY STOPPING.")
+            #    break
 
         self.plot_initialized = False
         print(" -= END OF EVOLUTION =- ", flush=True)
